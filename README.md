@@ -1,4 +1,3 @@
 # Hobs-ML-zoomcamp
-My ML zoom camp workspace
 
-Tnis is an example
+This repo contains all ml_zoom_camp classes and asssignments
