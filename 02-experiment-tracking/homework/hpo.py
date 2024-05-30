@@ -36,12 +36,20 @@ def run_optimization(data_path: str, num_trials: int):
 
     def objective(params):
 
-        rf = RandomForestRegressor(**params)
-        rf.fit(X_train, y_train)
-        y_pred = rf.predict(X_val)
-        rmse = mean_squared_error(y_val, y_pred, squared=False)
+        with mlflow.start_run():
+            rf = RandomForestRegressor(**params)
+            rf.fit(X_train, y_train)
+            y_pred = rf.predict(X_val)
+            rmse = mean_squared_error(y_val, y_pred, squared=False)
+            
+            mlflow.log_metric("Root mean squared error", rmse)
+            mlflow.log_params(params)
 
-        return {'loss': rmse, 'status': STATUS_OK}
+            mlflow.sklearn.log_model(rf, artifact_path="models")
+
+            return {'loss': rmse, 'status': STATUS_OK}
+            
+
 
     search_space = {
         'max_depth': scope.int(hp.quniform('max_depth', 1, 20, 1)),
@@ -56,7 +64,7 @@ def run_optimization(data_path: str, num_trials: int):
         fn=objective,
         space=search_space,
         algo=tpe.suggest,
-        max_evals=num_trials,
+        max_evals= num_trials,
         trials=Trials(),
         rstate=rstate
     )
