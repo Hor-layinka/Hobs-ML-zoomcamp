@@ -1,5 +1,5 @@
 # config file version
-
+apiVersion: 1
 
 # list of data sources to insert/update
 # available in the database
@@ -8,7 +8,7 @@ datasources:
     type: postgres
     access: proxy
     url: db.:5432
-    database: monitor_DurationModel
+    database: test
     user: postgres
     secureJsonData:
       password: 'example'
