@@ -1,0 +1,15 @@
+{
+  "id": "0006070e-fb15-42ca-a03c-22a705351edb",
+  "name": "NYC Taxi Data quality Project_mar",
+  "description": "Ride duration data Quality metrics in Evidently",
+  "dashboard": {
+    "name": "NYC Taxi Data quality Project_mar",
+    "panels": [],
+    "tabs": [],
+    "tab_id_to_panel_ids": {}
+  },
+  "team_id": null,
+  "date_from": null,
+  "date_to": null,
+  "created_at": "2024-06-23T17:32:57.364792"
+}
