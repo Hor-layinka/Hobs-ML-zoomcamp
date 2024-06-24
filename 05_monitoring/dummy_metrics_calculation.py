@@ -27,10 +27,10 @@ create table dummy_metrics(
 
 def prep_db():
 	with psycopg.connect("host=localhost port=5432 user=postgres password=example", autocommit=True) as conn:
-		res = conn.execute("SELECT 1 FROM pg_database WHERE datname='monitor_DurationModel'")
+		res = conn.execute("SELECT 1 FROM pg_database WHERE datname='test'")
 		if len(res.fetchall()) == 0:
-			conn.execute("create database monitor_DurationModel;")
-		with psycopg.connect("host=localhost port=5432 dbname=monitor_DurationModel user=postgres password=example") as conn:
+			conn.execute("create database test;")
+		with psycopg.connect("host=localhost port=5432 dbname=test user=postgres password=example") as conn:
 			conn.execute(create_table_statement)
 
 # calcilate dummy metrics values
@@ -50,8 +50,8 @@ def calculate_dummy_metrics_postgres(curr):
 def main():
 	prep_db()
 	last_send = datetime.datetime.now()-datetime.timedelta(seconds=10)
-	with psycopg.connect("host=localhost port=5432 dbname=monitor_DurationModel user=postgres password=example", autocommit=True) as conn:
-		for i in range(0,10):
+	with psycopg.connect("host=localhost port=5432 dbname=test user=postgres password=example", autocommit=True) as conn:
+		for i in range(0,100):
 			with conn.cursor() as curr:
 				calculate_dummy_metrics_postgres(curr)
 
